@@ -15,11 +15,11 @@ Description: >
 
 Parameters:
   VPCCIDR:
-    Description: CIDR Block for LAMP instance Demo.
+    Description: CIDR Block for the online store project.
     Type: String
-    Default: 10.20.30.0/20
+    Default: 10.20.16.0/20
     AllowedValues:
-      - 10.20.30.0/20
+      - 10.20.16.0/20
   PublicSubnet1Param:
     Description: Public Subnet 1
     Type: String
@@ -33,6 +33,7 @@ Parameters:
   LatestAmiId:
     Type: "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>"
     Default: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
+
 Resources:
   VPC:
     Type: "AWS::EC2::VPC"

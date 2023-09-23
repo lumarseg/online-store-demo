@@ -1,0 +1,270 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Proyecto Tienda On Line.
+Parameters:
+  VPCCIDR:
+    Description: CIDR Block for LAMP instance Demo.
+    Type: String
+    Default: 10.20.30.0/20
+    AllowedValues:
+      - 10.20.30.0/20
+  PublicSubnet1Param:
+    Description: Public Subnet 1
+    Type: String
+    Default: 10.20.30.0/24
+    AllowedValues:
+      - 10.20.30.0/24
+  KeyName:
+    Type: String
+    Description: Keyname for the keypair used
+    Default: primary-blue
+  LatestAmiId:
+    Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
+Resources:
+  VPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: !Ref VPCCIDR
+      EnableDnsHostnames: 'true'
+      Tags:
+        - Key: VPC
+          Value: LAMP Demo
+        - Key: Name
+          Value: LAMP Demo VPC
+        - Key: CF Stack ID
+          Value:
+            Ref: AWS::StackId
+  InternetGateway:
+    Type: 'AWS::EC2::InternetGateway'
+    DependsOn: VPC
+    Properties:
+      Tags:
+        - Key: IGW
+          Value: LAMP Demo
+        - Key: Name
+          Value: LAMP Demo IGW
+        - Key: CF Stack ID
+          Value:
+            Ref: AWS::StackId
+  AttachGateway:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    DependsOn:
+      - VPC
+      - InternetGateway
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+  PublicSubnet1:
+    Type: 'AWS::EC2::Subnet'
+    DependsOn: VPC
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PublicSubnet1Param
+      AvailabilityZone: !Select 
+        - '0'
+        - !GetAZs ''
+      MapPublicIpOnLaunch: 'true'
+      Tags:
+        - Key: SUBNET 1
+          Value: LAMP Demo
+        - Key: Name
+          Value: LAMP Demo Public Subnet 1
+        - Key: CF Stack ID
+          Value:
+            Ref: AWS::StackId
+  PublicRouteTable:
+    Type: 'AWS::EC2::RouteTable'
+    DependsOn:
+      - VPC
+      - AttachGateway
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Public Route Table
+          Value: LAMP Demo
+        - Key: Name
+          Value: LAMP Demo Public Route Table
+        - Key: CF Stack ID
+          Value:
+            Ref: AWS::StackId
+  PublicRoute:
+    Type: 'AWS::EC2::Route'
+    DependsOn:
+      - VPC
+      - PublicRouteTable
+      - InternetGateway
+      - AttachGateway
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+  PublicSubnet1RouteTableAssociation:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    DependsOn:
+      - PublicRouteTable
+      - PublicSubnet1
+    Properties:
+      SubnetId: !Ref PublicSubnet1
+      RouteTableId: !Ref PublicRouteTable
+  NATGateway:
+    DependsOn: AttachGateway
+    Type: 'AWS::EC2::NatGateway'
+    Properties:
+      AllocationId: !GetAtt
+        - EIP
+        - AllocationId
+      SubnetId: !Ref PublicSubnet1
+  EIP:
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: vpc
+  LAMPInstance:
+    Type: 'AWS::EC2::Instance'
+    DependsOn:
+      - VPC
+      - LAMPSecurityGroup
+      - PublicSubnet1
+    Properties:
+      ImageId: !Ref LatestAmiId
+      KeyName: !Ref KeyName
+      IamInstanceProfile: !Ref LAMPInstanceProfile
+      InstanceType: t3.small
+      NetworkInterfaces:
+        - DeviceIndex: '0'
+          AssociatePublicIpAddress: 'true'
+          SubnetId: !Ref PublicSubnet1
+          GroupSet:
+            - !Ref LAMPSecurityGroup
+      SourceDestCheck: 'false'
+      Tags:
+        - Key: EC2
+          Value: LAMP Demo
+        - Key: Name
+          Value: LAMP Demo EC2
+        - Key: CF Stack ID
+          Value:
+            Ref: AWS::StackId
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -ex 
+            - |
+              yum -y update 
+            - |
+              amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2 
+            - |
+              yum -y install httpd mariadb-server wget 
+            - |
+              systemctl enable httpd 
+            - |
+              systemctl start httpd 
+            - |
+              systemctl enable mariadb 
+            - |
+              systemctl start mariadb 
+            - >
+              echo '<html><h1>Hello From Your Web Server!</h1></html>' >
+              /var/www/html/index.html 
+            - |
+              find /var/www -type d -exec chmod 2775 {} \; 
+            - |
+              find /var/www -type f -exec chmod 0664 {} \; 
+            - |
+              echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php 
+            - |
+              usermod -a -G apache ec2-user 
+            - |
+              chown -R ec2-user:apache /var/www 
+            - |
+              chmod 2775 /var/www 
+            - >
+              wget
+              https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RESTRT-1/179-activity-JAWS-migrate-rds/s3/setup-v2.tar.gz 
+            - |
+              tar -zxvf setup-v2.tar.gz 
+            - >
+              wget
+              https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RESTRT-1/179-activity-JAWS-migrate-rds/s3/db-v2.tar.gz 
+            - |
+              tar -zxvf db-v2.tar.gz 
+            - >
+              wget
+              https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RESTRT-1/179-activity-JAWS-migrate-rds/s3/cafe-v2.tar.gz  
+            - |
+              tar -zxvf cafe-v2.tar.gz -C /var/www/html/ 
+            - |
+              cd setup 
+            - |
+              ./set-app-parameters.sh 
+            - |
+              cd ../db/ 
+            - |
+              ./set-root-password.sh 
+            - |
+              ./create-db.sh
+  LAMPSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    DependsOn: VPC
+    Properties:
+      GroupDescription: Security group for the Cafe instance
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: LAMPSecurityGroup
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: '-1'
+          FromPort: '0'
+          ToPort: '65535'
+          CidrIp: 0.0.0.0/0
+  LAMPInstanceProfile:
+    Type: 'AWS::IAM::InstanceProfile'
+    DependsOn:
+      - LAMPIamRole
+    Properties:
+      Path: /
+      Roles:
+        - !Ref LAMPIamRole
+  LAMPIamPolicy:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: FullSsmAccess
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'ssm:*'
+            Resource: '*'
+      Roles:
+        - !Ref LAMPIamRole
+  LAMPIamRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+Outputs:
+  VanessaLAMPHostPublicIP:
+    Description: Public IP address of LAMP Host instance
+    Value: !GetAtt 
+      - LAMPInstance
+      - PublicIp
+  Region:
+    Value: !Ref 'AWS::Region'

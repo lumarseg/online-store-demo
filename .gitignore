@@ -1,0 +1,12 @@
+# Ignore all files and directories named "temp"
+temp/
+
+# Ignore files with a specific extension in all directories
+**/*.bak
+
+# Ignore log files and temporary files
+*.log
+*.tmp
+
+# Ignore backup files created by text editors
+*~

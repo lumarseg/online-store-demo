@@ -1,8 +1,9 @@
 #!/bin/bash
 #
 # Script to set the Mariadb root user password right after database installation.
-# Check the set-root-password.log file after running it to verify successful execution.
 #
+# Check the set-root-password.log file after running it to verify successful execution.
+# 
 mysql --user=root --verbose < sql/set-root-password.sql > set-root-password.log
 
 echo

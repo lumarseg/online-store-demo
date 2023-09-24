@@ -24,17 +24,12 @@ fi
 # Run the AWS CLI command to create the Keypair
 aws ec2 create-key-pair --key-name "$keypair_name" --key-type ed25519 --query 'KeyMaterial' --output text > "${keypair_name}.pem"
 
-# Move Keypair to "~/.ssh/"
+# Move Keypair to ""
 mv "${keypair_name}.pem" ~/.ssh/"${keypair_name}.pem"
-sudo chmod 600 ~/.ssh/"${keypair_name}.pem"
 
 # Check if the command was executed correctly
 if [ $? -eq 0 ]; then
-  echo "The Keypair '$keypair_name' has been successfully created and saved to: ~/.ssh/'${keypair_name}.pem'."
+  echo "The Keypair '$keypair_name' has been successfully created and saved to '${keypair_name}.pem'."
 else
   echo "An error occurred while creating the Keypair."
 fi
-
-echo
-echo Done !!!
-echo

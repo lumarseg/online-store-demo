@@ -3,6 +3,7 @@ temp/
 
 # Ignore files with a specific extension in all directories
 **/*.bak
+**/*.gz
 
 # Ignore log files and temporary files
 *.log

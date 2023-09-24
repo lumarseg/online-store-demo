@@ -6,13 +6,6 @@ Description: >
   message queues, and other AWS services required to run a highly available
   and scalable online store.
 
-  The template is the final work of the AWS Re/Start + ELEV8 CRSAN5 | 2023 program.
-
-  Developed by:
-    - Karina Corrales Mora
-    - Vanessa Hernández Muñoz
-    - Luis Diego Maroto Segura
-
 Parameters:
   VPCCIDR:
     Description: CIDR Block for the online store project.
@@ -41,10 +34,10 @@ Resources:
       CidrBlock: !Ref VPCCIDR
       EnableDnsHostnames: "true"
       Tags:
-        - Key: VPC
-          Value: LAMP Demo
         - Key: Name
-          Value: LAMP Demo VPC
+          Value: Online Store Project - VPC
+        - Key: CostCenter
+          Value: Online_Store_Project
         - Key: CF Stack ID
           Value:
             Ref: AWS::StackId
@@ -53,10 +46,10 @@ Resources:
     DependsOn: VPC
     Properties:
       Tags:
-        - Key: IGW
-          Value: LAMP Demo
         - Key: Name
-          Value: LAMP Demo IGW
+          Value: Online Store Project - IGW
+        - Key: CostCenter
+          Value: Online_Store_Project
         - Key: CF Stack ID
           Value:
             Ref: AWS::StackId
@@ -79,10 +72,10 @@ Resources:
         - !GetAZs ""
       MapPublicIpOnLaunch: "true"
       Tags:
-        - Key: SUBNET 1
-          Value: LAMP Demo
         - Key: Name
-          Value: LAMP Demo Public Subnet 1
+          Value: Online Store Project - SUBNET_1
+        - Key: CostCenter
+          Value: Online_Store_Project
         - Key: CF Stack ID
           Value:
             Ref: AWS::StackId
@@ -94,10 +87,10 @@ Resources:
     Properties:
       VpcId: !Ref VPC
       Tags:
-        - Key: Public Route Table
-          Value: LAMP Demo
         - Key: Name
-          Value: LAMP Demo Public Route Table
+          Value: Online Store Project - ROUTE_TABLE
+        - Key: CostCenter
+          Value: Online_Store_Project
         - Key: CF Stack ID
           Value:
             Ref: AWS::StackId
@@ -151,10 +144,10 @@ Resources:
             - !Ref LAMPSecurityGroup
       SourceDestCheck: "false"
       Tags:
-        - Key: EC2
-          Value: LAMP Demo
         - Key: Name
-          Value: LAMP Demo EC2
+          Value: Online Store Project - LAMP_INSTANCE
+        - Key: CostCenter
+          Value: Online_Store_Project
         - Key: CF Stack ID
           Value:
             Ref: AWS::StackId
@@ -225,7 +218,12 @@ Resources:
       VpcId: !Ref VPC
       Tags:
         - Key: Name
-          Value: LAMPSecurityGroup
+          Value: Online Store Project - LAMP_SG
+        - Key: CostCenter
+          Value: Online_Store_Project
+        - Key: CF Stack ID
+          Value:
+            Ref: AWS::StackId
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: "22"

@@ -548,6 +548,7 @@ Outputs:
           - LAMPInstance
           - PrivateIp
   Region:
+    Description: Region Name
     Value: !Ref "AWS::Region"
   AccessKey:
     Value: !Ref IAMUserAccessKey

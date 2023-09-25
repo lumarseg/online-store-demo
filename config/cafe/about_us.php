@@ -27,7 +27,7 @@
 
 </head>
 
-<body data-home-page="Inicio.html" data-home-page-title="Inicio" data-path-to-root="./" class="u-body u-xl-mode" data-lang="es">
+<body data-path-to-root="./" class="u-body u-xl-mode" data-lang="es">
 
 	<!-- Section: PHP Code -->
 	<?php
@@ -65,11 +65,11 @@
 						</li>
 						<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-3-base u-text-hover-palette-3-base" href="about_us.php" style="padding: 10px 20px;">Acerca de</a>
 						</li>
-						<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-3-base u-text-hover-palette-3-base" href="Contacto.html" style="padding: 10px 20px;">Contacto</a>
+						<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-3-base u-text-hover-palette-3-base" href="contact_us.php" style="padding: 10px 20px;">Contáctenos</a>
 						</li>
 						<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-3-base u-text-hover-palette-3-base" href="menu.php" style="padding: 10px 20px;">Menu</a>
 						</li>
-						<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-3-base u-text-hover-palette-3-base" href="orderHistory.php" style="padding: 10px 20px;">Ordenes</a>
+						<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-3-base u-text-hover-palette-3-base" href="orderHistory.php" style="padding: 10px 20px;">Órdenes</a>
 						</li>
 					</ul>
 				</div>
@@ -82,11 +82,11 @@
 								</li>
 								<li class="u-nav-item"><a class="u-button-style u-nav-link" href="about_us.php">Acerca de</a>
 								</li>
-								<li class="u-nav-item"><a class="u-button-style u-nav-link" href="Contacto.html">Contacto</a>
+								<li class="u-nav-item"><a class="u-button-style u-nav-link" href="contact_us.php">Contáctenos</a>
 								</li>
 								<li class="u-nav-item"><a class="u-button-style u-nav-link" href="menu.php">Menu</a>
 								</li>
-								<li class="u-nav-item"><a class="u-button-style u-nav-link" href="orderHistory.php">Ordenes</a>
+								<li class="u-nav-item"><a class="u-button-style u-nav-link" href="orderHistory.php">Órdenes</a>
 								</li>
 							</ul>
 						</div>
@@ -181,12 +181,6 @@
 			<p class="u-small-text u-text u-text-variant u-text-1">Proyecto Final | ​AWS Re/Start + ELEV8 CRSAN5 | 2023</p>
 		</div>
 	</footer>
-
-
-
-
-
-
 
 </body>
 

@@ -8,7 +8,7 @@
 
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/nicepage.css" media="screen">
-	<link rel="stylesheet" href="css/Inicio.css" media="screen">
+	<link rel="stylesheet" href="css/index.css" media="screen">
 	<link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
 
 	<script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
@@ -64,7 +64,7 @@
 					<ul class="u-nav u-unstyled u-nav-1">
 						<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-3-base u-text-hover-palette-3-base" href="index.php" style="padding: 10px 20px;">Inicio</a>
 						</li>
-						<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-3-base u-text-hover-palette-3-base" href="Acerca-de.html" style="padding: 10px 20px;">Acerca de</a>
+						<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-3-base u-text-hover-palette-3-base" href="about_us.php" style="padding: 10px 20px;">Acerca de</a>
 						</li>
 						<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-3-base u-text-hover-palette-3-base" href="Contacto.html" style="padding: 10px 20px;">Contacto</a>
 						</li>
@@ -81,7 +81,7 @@
 							<ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
 								<li class="u-nav-item"><a class="u-button-style u-nav-link" href="index.php">Inicio</a>
 								</li>
-								<li class="u-nav-item"><a class="u-button-style u-nav-link" href="Acerca-de.html">Acerca de</a>
+								<li class="u-nav-item"><a class="u-button-style u-nav-link" href="about_us.php">Acerca de</a>
 								</li>
 								<li class="u-nav-item"><a class="u-button-style u-nav-link" href="Contacto.html">Contacto</a>
 								</li>

@@ -26,6 +26,7 @@ aws ec2 create-key-pair --key-name "$keypair_name" --key-type ed25519 --query 'K
 
 # Move Keypair to ""
 mv "${keypair_name}.pem" ~/.ssh/"${keypair_name}.pem"
+sudo chmod 600 ~/.ssh/"${keypair_name}.pem"
 
 # Check if the command was executed correctly
 if [ $? -eq 0 ]; then

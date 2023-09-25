@@ -17,8 +17,8 @@ CREATE TABLE product_group (
 /* INSERT initialization data into the PRODUCT_GROUP table. */
 
 INSERT INTO product_group (product_group_number, product_group_name) VALUES
-	  (1, 'Pastries')
-	, (2, 'Drinks');
+	  (1, 'Reposteria')
+	, (2, 'Bebidas');
 
 /* Create PRODUCT table. */
 
@@ -35,15 +35,15 @@ CREATE TABLE product (
 /* INSERT initialization data into the PRODUCT table. */
 
 INSERT INTO product (product_name, description, price, product_group, image_url) VALUES
-	  ('Croissant', 'Fresh, buttery and fluffy... Simply delicious!', 1.50, 1, 'images/Croissants.jpg')
-	, ('Donut', 'We have more than half-a-dozen flavors!', 1.00, 1, 'images/Donuts.jpg')
-	, ('Chocolate Chip Cookie', 'Made with Swiss chocolate with a touch of Madagascar vanilla', 2.50, 1, 'images/Chocolate-Chip-Cookies.jpg')
-	, ('Muffin', 'Banana bread, blueberry, cranberry or apple', 3.00, 1, 'images/Muffins.jpg')
-	, ('Strawberry Blueberry Tart', 'Bursting with the taste and aroma of fresh fruit', 3.50, 1, 'images/Strawberry-Blueberry-Tarts.jpg')
-    , ('Strawberry Tart', 'Made with fresh ripe strawberries and a delicious whipped cream', 3.50, 1, 'images/Strawberry-Tarts.jpg')
-	, ('Coffee', 'Freshly-ground black or blended Columbian coffee', 3.00, 2, 'images/Coffee.jpg')
-	, ('Hot Chocolate', 'Rich and creamy, and made with real chocolate', 3.00, 2, 'images/Cup-of-Hot-Chocolate.jpg')
-	, ('Latte', 'Offered hot or cold and in various delicious flavors', 3.50, 2, 'images/Latte.jpg');
+	  ('Croissant', 'Fresco, suave y esponjoso ... Simplemente delicioso!', 1.50, 1, 'images/Croissants.jpg')
+	, ('Donas', '¡Tenemos más de media docena de sabores!', 1.00, 1, 'images/Donuts.jpg')
+	, ('Chocolate Chip Cookie', 'Elaborado con chocolate suizo con un toque de vainilla de Madagascar.', 2.50, 1, 'images/Chocolate-Chip-Cookies.jpg')
+	, ('Muffin', 'Pan de banano, arándanos, arándanos o manzana', 3.00, 1, 'images/Muffins.jpg')
+	, ('Strawberry Blueberry Tart', 'Rebosante del sabor y aroma de la fruta fresca.', 3.50, 1, 'images/Strawberry-Blueberry-Tarts.jpg')
+    , ('Strawberry Tart', 'Elaborado con fresas frescas maduras y una deliciosa crema batida.', 3.50, 1, 'images/Strawberry-Tarts.jpg')
+	, ('Coffee', 'Café Costarricense negro recién molido', 3.00, 2, 'images/Coffee.jpg')
+	, ('Hot Chocolate', 'Rico y cremoso, y elaborado con chocolate real.', 3.00, 2, 'images/Cup-of-Hot-Chocolate.jpg')
+	, ('Latte', 'Se ofrece frío o caliente y en varios sabores deliciosos.', 3.50, 2, 'images/Latte.jpg');
 
 /* Create ORDER table. */
 

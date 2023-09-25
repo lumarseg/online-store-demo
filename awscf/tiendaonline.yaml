@@ -174,12 +174,12 @@ Resources:
           chmod 2775 /var/www
 
           # Download and configure additional settings
-          wget https://lumarseg-onlinestore-pub.s3.amazonaws.com/setup-v2.tar.gz
-          tar -zxvf setup-v2.tar.gz
-          wget https://lumarseg-onlinestore-pub.s3.amazonaws.com/db-v2.tar.gz
-          tar -zxvf db-v2.tar.gz
-          wget https://lumarseg-onlinestore-pub.s3.amazonaws.com/cafe-v2.tar.gz
-          tar -zxvf cafe-v2.tar.gz -C /var/www/html/
+          wget https://lumarseg-onlinestore-pub.s3.amazonaws.com/setup.tar.gz
+          tar -zxvf setup.tar.gz
+          wget https://lumarseg-onlinestore-pub.s3.amazonaws.com/db.tar.gz
+          tar -zxvf db.tar.gz
+          wget https://lumarseg-onlinestore-pub.s3.amazonaws.com/store.tar.gz
+          tar -zxvf store.tar.gz -C /var/www/html/
           cd setup
           ./set-app-parameters.sh
           cd ../db/

@@ -149,16 +149,18 @@
 
                     echo '<div>';
                     echo '<p>';
-                    echo '<b>Order Number: ' . $row["order_number"] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date: ' . substr($row["order_date_time"], 0, 10)
-                        . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time: ' . substr($row["order_date_time"], 11, 8) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Amount: ' . $currency . number_format($row["order_total"], 2) . '</b>';
+                    echo '<b>Orden No.: ' . $row["order_number"]
+                        . '&nbsp; | Monto Total: ' . $currency . number_format($row["order_total"], 2)
+                        . '&nbsp; | Fecha y hora: ' . substr($row["order_date_time"], 0, 10) . ' ' . substr($row["order_date_time"], 11, 8)
+                        . '</b>';
                     echo '</p>';
 
                     echo '<table style="width: 80%">';
                     echo '<tr>';
-                    echo '<th>Item</th>';
-                    echo '<th>Price</th>';
-                    echo '<th>Quantity</th>';
-                    echo '<th>Amount</th>';
+                    echo '<th>Artículo</th>';
+                    echo '<th>Precio</th>';
+                    echo '<th>Cantidad</th>';
+                    echo '<th>Monto</th>';
                     echo '</tr>';
 
                     $previousOrderNumber = $row["order_number"];
@@ -173,7 +175,7 @@
             }
         } else {
 
-            echo '<p class="center">You have no orders at this time.</p>';
+            echo '<p class="center">No tienes pedidos en este momento.</p>';
         }
 
         // Close the last table division.

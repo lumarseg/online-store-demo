@@ -172,7 +172,7 @@ $conn->close();
 		function validateOrder() {
 
 			if (calculateOrderTotal() <= 0.0) {
-				alert('Please select at least one item to buy.');
+				alert('Por favor seleccione al menos un artículo para comprar.');
 				return false;
 			}
 		}

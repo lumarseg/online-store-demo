@@ -171,23 +171,27 @@
 		$conn->close();
 		?>
 
-		<p class="center">Thank for your order! It will be available for pickup
-			within 15 minutes. Your order number and details are shown below.</p>
+		<p class="center">¡Gracias por tu pedido! Estará disponible en 15 minutos. </p>
+		<p class="center"> Su número de pedido y sus detalles se muestran a continuación.</p>
+		<hr>
 
 		<?php
-
-		echo '<div>';
+		echo '<div class="center">';
 		echo '<p>';
-		echo '<b>Order Number: ' . $orderNumber . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date: ' . substr($currentTimeStamp, 0, 10)
-			. '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time: ' . substr($currentTimeStamp, 11, 8) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Amount: ' . $currency . number_format($totalAmount, 2) . '</b>';
+		echo '<b>Orden No.: ' . $orderNumber
+			. '&nbsp; | Monto total: ' . $currency . number_format($totalAmount, 2)
+			. '&nbsp; | Fecha y hora: ' . substr($currentTimeStamp, 0, 10) . ' ' . substr($currentTimeStamp, 11, 8)
+			. '</b>';
 		echo '</p>';
 
+		// Table container
+		echo '<div class="center">';
 		echo '<table style="width: 80%">';
 		echo '<tr>';
-		echo '<th>Item</th>';
-		echo '<th>Price</th>';
-		echo '<th>Quantity</th>';
-		echo '<th>Amount</th>';
+		echo '<th>Artículo</th>';
+		echo '<th>Precio</th>';
+		echo '<th>Cantidad</th>';
+		echo '<th>Monto</th>';
 		echo '</tr>';
 
 		for ($i = 0; $i < sizeof($amounts); $i++) {
@@ -203,6 +207,9 @@
 			}
 		}
 		echo '</table>';
+
+		// End Table container
+		echo '</div>';
 		echo '</div>';
 		?>
 	</div>

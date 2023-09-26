@@ -165,7 +165,8 @@ Resources:
           systemctl start mariadb
 
           # Configure online store web server
-          echo '<html><h1>Hello From the Online Store Web Server!</h1></html>' > /var/www/html/index.html
+          echo '<html><h1>Welcome to the Online Store !!!</h1></html>' >> /var/www/html/index.html
+          echo 'Please, write /store after the IP Address in your browser to continue...' >> /var/www/html/index.html
           find /var/www -type d -exec chmod 2775 {} \;
           find /var/www -type f -exec chmod 0664 {} \;
           echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
